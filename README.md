@@ -1,2 +1,5 @@
 # ProgramasIC
-Programas da IC 
+
+Contém os seguintes programas da IC
+
+- Grafo Aleatório
