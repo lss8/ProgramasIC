@@ -3,71 +3,83 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#define n 1000
+#define n 20
 
 using namespace std;
 
 int main()
+
 {
-    int i, j, z, c ;
-    int nos[n][n] ;
-    float prob, p ;
-    char resp ;
+int pop[n][n], peso[n], ptotal = 0, i, j, k;
+float prob, prel;
 
-    srand((unsigned)time(NULL));
+srand((unsigned)time(NULL));
 
-    do {
-    for (i=0;i<n;i++) {
-        for (j=0;j<n;j++) {
-            nos[i][j] = 0 ;
-        }
+for (i=0;i<n;i++){
+    for (j=0;j<n;j++){
+        pop[i][j] = 0;
     }
-
-    cout << "Defina o valor de Z" << endl ;
-    cin >> z ;
-    prob = (float)z/float(n) ;
-
-    c = 0 ;
-    for (i=0;i<n;i++) {
-        for (j=c;j<n;j++) {
-            if (i == j) {
-                nos[i][j] = 0 ;
-            }
-            else {
-                if (nos[i][j] == 0) {
-                    p = rand()%1001 ;
-                    p = p/double(1000) ;
-                    if (p <= prob) {
-                        nos[i][j] = 1 ;
-                        nos[j][i] = 1 ;
-                    }
-                }
-            }
-        }
-        c++ ;
-    }
-
-    cout << prob << endl ;
-
-    for (i=0;i<n;i++) {
-        for (j=0;j<n;j++) {
-            /*if (nos[i][j] == 0) {
-            printf("\033[22;34m%d ", nos[i][j]);
-            }*/
-            if (nos[i][j] == 1) {
-            //printf("\033[22;31m%d ", nos[i][j]);
-            c++ ;
-            }
-        }
-        //cout << endl ;
-    }
-
-    printf("\033[22;37m%d\n", c);
-
-    cout << "Deseja executar novamente?" << endl ;
-    cin >> resp ;
-
-    } while (resp == 's' || resp == 'S') ;
-
-    return 0 ;
 }
+
+for(i=0;i<3;i++){
+    for(j=0;j<3;j++){
+        pop[i][j] = 1;
+        pop[j][i] = 1;
+            if(i==j){
+                pop[i][j] = 0;
+            }
+    }
+}
+
+for(k=3;k<n;k++){
+
+for(i=0;i<n;i++){
+    peso[i] = 0;
+    cout << peso[i] << " ";
+}
+cout << endl;
+
+for (i=0;i<n;i++){
+    for (j=0;j<n;j++){
+        if(pop[i][j] == 1);
+            peso[i] = peso[i] + 1;
+    }
+}
+
+for(i=0;i<n;i++){
+    cout << peso[i] << " ";
+}
+
+for (i=0;i<n;i++){
+    ptotal = ptotal + peso[i];
+}
+
+cout << "o peso total da " << k-2 << " rodada e: " << ptotal << endl;
+
+for(j=0;j<n;j++){
+    prob = (rand()%1000)/1000;
+    prel = (double)peso[j]/(double)ptotal;
+        if(prob<=prel){
+            pop[k][j] = 1;
+            pop[j][k] = 1;
+
+        }
+        if(k==j) {
+            pop[k][j] = 0;
+        }
+
+}
+
+for (i=0;i<n;i++){
+    for (j=0;j<n;j++){
+        cout << pop[i][j];
+    }
+cout << endl;
+}
+
+}
+
+}
+
+
+
